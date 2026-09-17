@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visor de Carta de Porte Digital</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; padding: 15px; margin: 0; }
+    .card { max-width: 500px; margin: auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .header { background: #1e3a8a; color: white; padding: 15px; text-align: center; }
+    .header h1 { margin: 0; font-size: 1.2rem; }
+    .header p { margin: 5px 0 0 0; font-size: 0.9rem; opacity: 0.8; }
+    .section { padding: 15px; border-bottom: 1px solid #e2e8f0; }
+    .section-title { font-weight: bold; color: #0284c7; margin-bottom: 8px; font-size: 0.9rem; text-transform: uppercase; }
+    .row { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.95rem; }
+    .label { color: #64748b; }
+    .value { font-weight: 600; color: #0f172a; text-align: right; }
+    .total-box { background: #eff6ff; padding: 15px; text-align: center; font-size: 1.2rem; font-weight: bold; color: #1e3a8a; }
+    .status { text-align: center; padding: 10px; background: #dcfce7; color: #15803d; font-size: 0.85rem; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="header">
+    <h1>CARTA DE PORTE DIGITAL</h1>
+    <p>Ref: <span id="v-ref">-</span></p>
+  </div>
+
+  <div class="status">✓ Documento Verificado Digitalmente</div>
+
+  <div class="section">
+    <div class="section-title">Transportista</div>
+    <div class="row"><span class="label">Nombre:</span><span class="value" id="v-carrier">-</span></div>
+    <div class="row"><span class="label">NIF/CIF:</span><span class="value" id="v-nif">-</span></div>
+    <div class="row"><span class="label">Matrícula:</span><span class="value" id="v-plate">-</span></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Ruta del Transporte</div>
+    <div class="row"><span class="label">Cargador:</span><span class="value" id="v-client">-</span></div>
+    <div class="row"><span class="label">Origen:</span><span class="value" id="v-origin">-</span></div>
+    <div class="row"><span class="label">Destinatario:</span><span class="value" id="v-destName">-</span></div>
+    <div class="row"><span class="label">Destino:</span><span class="value" id="v-destination">-</span></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Detalle Carga</div>
+    <div class="row"><span class="label">Mercancía:</span><span class="value" id="v-cargo">-</span></div>
+    <div class="row"><span class="label">Peso:</span><span class="value" id="v-weight">-</span></div>
+    <div class="row"><span class="label">Bultos:</span><span class="value" id="v-packages">-</span></div>
+  </div>
+
+  <div class="total-box">
+    Total Porte: <span id="v-total">0.00 €</span>
+  </div>
+</div>
+
+<script>
+  // Obtención y muestra de parámetros de la URL
+  const params = new URLSearchParams(window.location.search);
+  
+  document.getElementById('v-ref').innerText = params.get('ref') || '-';
+  document.getElementById('v-carrier').innerText = params.get('carrier') || '-';
+  document.getElementById('v-nif').innerText = params.get('nif') || '-';
+  document.getElementById('v-plate').innerText = params.get('plate') || '-';
+  document.getElementById('v-client').innerText = params.get('client') || '-';
+  document.getElementById('v-origin').innerText = params.get('origin') || '-';
+  document.getElementById('v-destName').innerText = params.get('destName') || '-';
+  document.getElementById('v-destination').innerText = params.get('destination') || '-';
+  document.getElementById('v-cargo').innerText = params.get('cargo') || '-';
+  document.getElementById('v-weight').innerText = (params.get('weight') || '-') + ' kg';
+  document.getElementById('v-packages').innerText = params.get('packages') || '-';
+  document.getElementById('v-total').innerText = params.get('total') || '0.00 €';
+</script>
+
+</body>
+</html>
